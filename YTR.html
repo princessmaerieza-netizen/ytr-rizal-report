@@ -3,1265 +3,2887 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>YTR RIZAL REPORT</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --cover-green:#1F3D2B;
-    --cover-green-dark:#132A1D;
-    --cover-green-light:#2C5039;
-    --gold:#C79A3D;
-    --gold-light:#E4C878;
-    --paper:#FBF7ED;
-    --paper-deep:#F3EDDB;
-    --paper-line:#E2D8B8;
-    --ink:#2B2419;
-    --ink-soft:#6E6551;
-    --rust:#B5602E;
-    --sage:#5C7A5A;
-    --sage-light:#DCE6D9;
-    --danger:#A6412D;
-    --font-display:'Fraunces', serif;
-    --font-body:'Inter', sans-serif;
-    --font-mono:'IBM Plex Mono', monospace;
-    --radius:10px;
-  }
-  *{ box-sizing:border-box; }
-  html,body{ margin:0; padding:0; }
-  body{
-    font-family:var(--font-body);
-    color:var(--ink);
-    background:
-      radial-gradient(circle at 15% 8%, rgba(199,154,61,0.10), transparent 40%),
-      var(--cover-green);
-    min-height:100vh;
-    padding: clamp(14px, 3vw, 36px);
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+
+:root{
+  --cover-green:#1F3D2B;
+  --cover-green-dark:#132A1D;
+  --cover-green-light:#2C5039;
+  --gold:#C79A3D;
+  --gold-light:#E4C878;
+
+  --paper:#FBF7ED;
+  --paper-deep:#F3EDDB;
+  --paper-line:#E2D8B8;
+
+  --ink:#2B2419;
+  --ink-soft:#6E6551;
+
+  --rust:#B5602E;
+  --sage:#5C7A5A;
+  --sage-light:#DCE6D9;
+  --danger:#A6412D;
+
+  --font-display:'Fraunces',serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+
+  --radius:10px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+
+  background:
+    radial-gradient(
+      circle at 15% 8%,
+      rgba(199,154,61,.10),
+      transparent 40%
+    ),
+    var(--cover-green);
+
+  min-height:100vh;
+  padding:clamp(14px,3vw,36px);
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+.binder{
+  max-width:1250px;
+  margin:auto;
+}
+
+/* HEADER */
+
+.cover{
+  color:var(--paper);
+  padding:10px 6px 22px;
+
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  justify-content:space-between;
+
+  gap:16px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.brand-mark{
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+  border:2px solid var(--gold);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-family:var(--font-display);
+  font-weight:600;
+
+  color:var(--gold-light);
+}
+
+.cover h1{
+  font-family:var(--font-display);
+  font-size:clamp(26px,4vw,36px);
+
+  margin:0;
+}
+
+.cover p{
+  margin:3px 0 0;
+
+  color:#CFE0D3;
+
+  font-size:13px;
+  font-family:var(--font-mono);
+}
+
+.cover-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.ghost-btn{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.35);
+
+  color:var(--paper);
+
+  padding:8px 14px;
+
+  border-radius:100px;
+
+  cursor:pointer;
+}
+
+.ghost-btn:hover{
+  background:rgba(255,255,255,.08);
+  border-color:var(--gold-light);
+}
+
+/* TABS */
+
+.tabs{
+  display:flex;
+  gap:6px;
+
+  padding:0 6px;
+
+  overflow-x:auto;
+}
+
+.tab{
+  font-family:var(--font-display);
+  font-weight:600;
+
+  font-size:14px;
+
+  color:#CFE0D3;
+
+  background:var(--cover-green-light);
+
+  border:0;
+
+  padding:12px 20px;
+
+  border-radius:10px 10px 0 0;
+
+  cursor:pointer;
+
+  white-space:nowrap;
+}
+
+.tab:hover{
+  background:#365f43;
+}
+
+.tab[aria-selected="true"]{
+  background:var(--paper);
+  color:var(--cover-green);
+}
+
+/* PAGE */
+
+.page{
+  background:var(--paper);
+
+  border-radius:0 10px 10px 10px;
+
+  padding:clamp(16px,3vw,32px);
+
+  box-shadow:0 18px 40px rgba(0,0,0,.28);
+
+  min-height:60vh;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+.section-title{
+  font-family:var(--font-display);
+  font-size:22px;
+
+  margin:0 0 4px;
+}
+
+.section-sub{
+  font-family:var(--font-mono);
+  font-size:12px;
+
+  color:var(--ink-soft);
+
+  margin:0 0 22px;
+}
+
+/* STAT CARDS */
+
+.stat-row{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(160px,1fr));
+
+  gap:14px;
+
+  margin-bottom:28px;
+}
+
+.stat-card{
+  background:var(--paper-deep);
+
+  border:1px solid var(--paper-line);
+
+  border-radius:var(--radius);
+
+  padding:16px 18px;
+}
+
+.stat-card .num{
+  font-family:var(--font-display);
+
+  font-size:30px;
+
+  color:var(--cover-green);
+}
+
+.stat-card .label{
+  font-family:var(--font-mono);
+
+  font-size:11px;
+
+  text-transform:uppercase;
+
+  color:var(--ink-soft);
+
+  margin-top:6px;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+  justify-content:space-between;
+
+  margin-bottom:16px;
+}
+
+.filter-group,
+.btn-group{
+  display:flex;
+
+  gap:6px;
+
+  flex-wrap:wrap;
+}
+
+.chip{
+  border:1px solid var(--paper-line);
+
+  background:var(--paper);
+
+  color:var(--ink-soft);
+
+  padding:6px 13px;
+
+  border-radius:100px;
+
+  cursor:pointer;
+
+  font-size:12px;
+
+  font-weight:600;
+}
+
+.chip.active{
+  background:var(--cover-green);
+
+  color:var(--paper);
+
+  border-color:var(--cover-green);
+}
+
+.search-input{
+  font-size:13px;
+
+  padding:8px 12px;
+
+  border:1px solid var(--paper-line);
+
+  border-radius:8px;
+
+  background:var(--paper);
+
+  min-width:190px;
+}
+
+.btn{
+  font-size:13px;
+
+  font-weight:600;
+
+  padding:9px 16px;
+
+  border-radius:8px;
+
+  cursor:pointer;
+}
+
+.btn-primary{
+  background:var(--cover-green);
+
+  color:var(--paper);
+
+  border:1px solid var(--cover-green);
+}
+
+.btn-primary:hover{
+  background:var(--cover-green-dark);
+}
+
+.btn-secondary{
+  background:transparent;
+
+  color:var(--ink);
+
+  border:1px solid var(--paper-line);
+}
+
+.btn-danger{
+  background:transparent;
+
+  color:var(--danger);
+
+  border:1px solid #E9C9BE;
+
+  padding:6px 10px;
+
+  font-size:12px;
+}
+
+.btn-edit{
+  background:transparent;
+
+  color:var(--cover-green);
+
+  border:1px solid var(--paper-line);
+
+  padding:6px 10px;
+
+  font-size:12px;
+}
+
+/* TABLE */
+
+.table-wrap{
+  overflow:auto;
+
+  border:1px solid var(--paper-line);
+
+  border-radius:var(--radius);
+
+  background:var(--paper);
+}
+
+table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  font-size:13px;
+
+  min-width:900px;
+}
+
+thead th{
+  font-family:var(--font-mono);
+
+  text-transform:uppercase;
+
+  font-size:10px;
+
+  letter-spacing:.4px;
+
+  color:var(--paper);
+
+  background:var(--cover-green);
+
+  padding:11px 12px;
+
+  text-align:left;
+
+  white-space:nowrap;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:2;
+}
+
+tbody td{
+  padding:9px 12px;
+
+  border-bottom:1px solid var(--paper-line);
+
+  vertical-align:middle;
+}
+
+tbody tr:hover{
+  background:rgba(199,154,61,.08);
+}
+
+.num-cell{
+  font-family:var(--font-mono);
+}
+
+.empty-row td{
+  text-align:center;
+
+  color:var(--ink-soft);
+
+  padding:35px;
+}
+
+/* PILLS */
+
+.pill{
+  display:inline-block;
+
+  padding:4px 9px;
+
+  border-radius:100px;
+
+  font-size:11px;
+
+  font-weight:600;
+}
+
+.pill-new{
+  background:var(--gold-light);
+  color:#5c4813;
+}
+
+.pill-following{
+  background:#F0D2C0;
+  color:var(--rust);
+}
+
+.pill-active{
+  background:var(--sage-light);
+  color:var(--sage);
+}
+
+.pill-inactive{
+  background:#E6E1D4;
+  color:var(--ink-soft);
+}
+
+/* MODAL */
+
+.overlay{
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(19,42,29,.55);
+
+  display:none;
+
+  align-items:flex-start;
+
+  justify-content:center;
+
+  padding:5vh 16px;
+
+  overflow:auto;
+
+  z-index:100;
+}
+
+.overlay.open{
+  display:flex;
+}
+
+.modal{
+  background:var(--paper);
+
+  border-radius:12px;
+
+  max-width:650px;
+
+  width:100%;
+
+  padding:24px;
+
+  box-shadow:0 24px 60px rgba(0,0,0,.4);
+}
+
+.modal h3{
+  font-family:var(--font-display);
+
+  font-size:20px;
+
+  margin:0 0 20px;
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.field label{
+  display:block;
+
+  font-family:var(--font-mono);
+
+  font-size:11px;
+
+  text-transform:uppercase;
+
+  color:var(--ink-soft);
+
+  margin-bottom:5px;
+}
+
+.field input,
+.field select{
+  width:100%;
+
+  padding:9px 11px;
+
+  border:1px solid var(--paper-line);
+
+  border-radius:7px;
+
+  background:#fff;
+}
+
+.field-row{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+}
+
+.modal-actions{
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:10px;
+
+  margin-top:20px;
+}
+
+/* EVENT SUMMARY */
+
+.event-summary{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(190px,1fr));
+
+  gap:14px;
+
+  margin-bottom:24px;
+}
+
+.event-card{
+  background:var(--paper-deep);
+
+  border:1px solid var(--paper-line);
+
+  border-radius:10px;
+
+  padding:16px;
+}
+
+.event-card-name{
+  font-family:var(--font-display);
+
+  font-size:17px;
+
+  color:var(--cover-green);
+
+  margin-bottom:8px;
+}
+
+.event-card-number{
+  font-family:var(--font-display);
+
+  font-size:30px;
+
+  font-weight:600;
+}
+
+.event-card-label{
+  font-size:11px;
+
+  color:var(--ink-soft);
+
+  text-transform:uppercase;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+
+  bottom:24px;
+
+  left:50%;
+
+  transform:translateX(-50%) translateY(20px);
+
+  background:var(--cover-green);
+
+  color:var(--paper);
+
+  padding:11px 20px;
+
+  border-radius:100px;
+
+  font-size:13px;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.2s;
+
+  z-index:200;
+}
+
+.toast.show{
+  opacity:1;
+
+  transform:translateX(-50%) translateY(0);
+}
+
+.loading{
+  padding:30px;
+
+  text-align:center;
+
+  color:var(--ink-soft);
+}
+
+@media(max-width:600px){
+
+  .field-row{
+    grid-template-columns:1fr;
   }
 
-  .binder{
-    max-width:1180px;
-    margin:0 auto;
-  }
-
-  /* ---------- Cover header ---------- */
   .cover{
-    color:var(--paper);
-    padding: 10px 6px 22px;
-    display:flex;
-    flex-wrap:wrap;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:16px;
-  }
-  .cover .brand{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-  .brand-mark{
-    width:46px; height:46px;
-    border-radius:50%;
-    border:2px solid var(--gold);
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:18px;
-    color:var(--gold-light);
-    flex-shrink:0;
-  }
-  .cover h1{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:clamp(26px, 4vw, 36px);
-    margin:0;
-    letter-spacing:0.2px;
-  }
-  .cover p{
-    margin:2px 0 0;
-    font-size:13.5px;
-    color:#CFE0D3;
-    font-family:var(--font-mono);
-    letter-spacing:0.3px;
-  }
-  .cover-actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-  .ghost-btn{
-    background:transparent;
-    border:1px solid rgba(255,255,255,0.35);
-    color:var(--paper);
-    font-family:var(--font-body);
-    font-size:13px;
-    font-weight:500;
-    padding:8px 14px;
-    border-radius:100px;
-    cursor:pointer;
-    transition:background 0.15s, border-color 0.15s;
-  }
-  .ghost-btn:hover{ background:rgba(255,255,255,0.08); border-color:var(--gold-light); }
-  .ghost-btn:focus-visible{ outline:2px solid var(--gold-light); outline-offset:2px; }
+    flex-direction:column;
 
-  /* ---------- Ledger tabs ---------- */
-  .tabs{
-    display:flex;
-    gap:6px;
-    padding: 0 6px;
-    overflow-x:auto;
-  }
-  .tab{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:14.5px;
-    letter-spacing:0.3px;
-    color:#CFE0D3;
-    background:var(--cover-green-light);
-    border:none;
-    padding:12px 22px;
-    border-radius:10px 10px 0 0;
-    cursor:pointer;
-    position:relative;
-    top:2px;
-    white-space:nowrap;
-    transition:background 0.15s, color 0.15s;
-  }
-  .tab:hover{ background:#365f43; color:var(--paper); }
-  .tab:focus-visible{ outline:2px solid var(--gold-light); outline-offset:-2px; }
-  .tab[aria-selected="true"]{
-    background:var(--paper);
-    color:var(--cover-green);
-    top:0;
-  }
-  .tab[aria-selected="true"]::after{
-    content:"";
-    position:absolute;
-    left:16px; right:16px; bottom:0;
-    height:3px;
-    background:var(--gold);
-    border-radius:2px;
+    align-items:flex-start;
   }
 
-  /* ---------- Page / content ---------- */
-  .page{
-    background:var(--paper);
-    border-radius:0 10px 10px 10px;
-    padding: clamp(16px, 3vw, 32px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.28);
-    min-height:60vh;
-  }
-  .section{ display:none; }
-  .section.active{ display:block; }
-
-  h2.section-title{
-    font-family:var(--font-display);
-    font-size:22px;
-    font-weight:600;
-    margin:0 0 4px;
-    color:var(--ink);
-  }
-  .section-sub{
-    font-family:var(--font-mono);
-    font-size:12.5px;
-    color:var(--ink-soft);
-    margin:0 0 22px;
-  }
-
-  /* ---------- Cards ---------- */
-  .stat-row{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
-    gap:14px;
-    margin-bottom:28px;
-  }
-  .stat-card{
-    background:var(--paper-deep);
-    border:1px solid var(--paper-line);
-    border-radius:var(--radius);
-    padding:16px 18px;
-  }
-  .stat-card .num{
-    font-family:var(--font-display);
-    font-size:30px;
-    font-weight:600;
-    color:var(--cover-green);
-    line-height:1;
-  }
-  .stat-card .label{
-    font-family:var(--font-mono);
-    font-size:11.5px;
-    text-transform:uppercase;
-    letter-spacing:0.6px;
-    color:var(--ink-soft);
-    margin-top:6px;
-  }
-
-  /* ---------- Ruled ledger table ---------- */
-  .table-wrap{
-    overflow-x:auto;
-    border:1px solid var(--paper-line);
-    border-radius:var(--radius);
-    background:repeating-linear-gradient(
-      var(--paper),
-      var(--paper) 38px,
-      var(--paper-line) 39px
-    );
-  }
-  table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:13.5px;
-  }
-  thead th{
-    font-family:var(--font-mono);
-    text-transform:uppercase;
-    letter-spacing:0.4px;
-    font-size:11px;
-    color:var(--paper);
-    background:var(--cover-green);
-    padding:10px 12px;
-    text-align:left;
-    white-space:nowrap;
-    position:sticky;
-    top:0;
-  }
-  tbody td{
-    padding:8px 12px;
-    border-bottom:1px solid transparent;
-    vertical-align:middle;
-    color:var(--ink);
-  }
-  tbody tr{ height:39px; }
-  tbody tr:hover{ background:rgba(199,154,61,0.08); }
-  .num-cell{ font-family:var(--font-mono); }
-  .totals-row td{
-    font-weight:700;
-    font-family:var(--font-mono);
-    background:var(--paper-deep);
-    border-top:2px solid var(--gold);
-  }
-  .empty-row td{
-    text-align:center;
-    color:var(--ink-soft);
-    font-style:italic;
-    padding:30px 12px;
-  }
-
-  /* ---------- Pills ---------- */
-  .pill{
-    display:inline-block;
-    padding:3px 10px;
-    border-radius:100px;
-    font-size:11.5px;
-    font-weight:600;
-    font-family:var(--font-body);
-    letter-spacing:0.2px;
-  }
-  .pill-new{ background:var(--gold-light); color:#5c4813; }
-  .pill-following{ background:#F0D2C0; color:var(--rust); }
-  .pill-active{ background:var(--sage-light); color:var(--sage); }
-  .pill-inactive{ background:#E6E1D4; color:var(--ink-soft); }
-
-  /* ---------- Toolbar ---------- */
   .toolbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:16px;
+    flex-direction:column;
   }
-  .filter-group{ display:flex; gap:6px; flex-wrap:wrap; }
-  .chip{
-    border:1px solid var(--paper-line);
-    background:var(--paper);
-    color:var(--ink-soft);
-    font-size:12.5px;
-    font-weight:600;
-    padding:6px 13px;
-    border-radius:100px;
-    cursor:pointer;
-    font-family:var(--font-body);
-    transition:all 0.15s;
-  }
-  .chip:hover{ border-color:var(--gold); color:var(--ink); }
-  .chip.active{ background:var(--cover-green); border-color:var(--cover-green); color:var(--paper); }
-  .chip:focus-visible{ outline:2px solid var(--cover-green); outline-offset:2px; }
 
   .search-input{
-    font-family:var(--font-body);
-    font-size:13px;
-    padding:8px 12px;
-    border:1px solid var(--paper-line);
-    border-radius:8px;
-    background:var(--paper);
-    color:var(--ink);
-    min-width:180px;
-  }
-  .search-input:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
-    outline:2px solid var(--gold);
-    outline-offset:1px;
-  }
-
-  .btn-group{ display:flex; gap:8px; flex-wrap:wrap; }
-  .btn{
-    font-family:var(--font-body);
-    font-weight:600;
-    font-size:13px;
-    padding:9px 16px;
-    border-radius:8px;
-    border:1px solid transparent;
-    cursor:pointer;
-    transition:transform 0.1s, background 0.15s;
-  }
-  .btn:active{ transform:translateY(1px); }
-  .btn-primary{ background:var(--cover-green); color:var(--paper); }
-  .btn-primary:hover{ background:var(--cover-green-dark); }
-  .btn-secondary{ background:transparent; color:var(--ink); border-color:var(--paper-line); }
-  .btn-secondary:hover{ border-color:var(--gold); }
-  .btn-danger{ background:transparent; color:var(--danger); border-color:#E9C9BE; font-size:12px; padding:6px 10px; }
-  .btn-danger:hover{ background:#FBEDE8; }
-  .btn-edit{ background:transparent; color:var(--cover-green); border-color:var(--paper-line); font-size:12px; padding:6px 10px; }
-  .btn-edit:hover{ border-color:var(--cover-green); }
-  .row-actions{ display:flex; gap:6px; }
-
-  /* ---------- Chart ---------- */
-  .chart-card{
-    background:var(--paper-deep);
-    border:1px solid var(--paper-line);
-    border-radius:var(--radius);
-    padding:18px 18px 8px;
-    margin-bottom:26px;
-  }
-  .chart-card h3{
-    font-family:var(--font-display);
-    font-size:15px;
-    margin:0 0 12px;
-    color:var(--ink);
-  }
-  .bar-label{ font-family:var(--font-mono); font-size:10px; fill:var(--ink-soft); }
-  .bar-value{ font-family:var(--font-mono); font-size:10.5px; fill:var(--ink); font-weight:600; }
-
-  /* ---------- Modal ---------- */
-  .overlay{
-    position:fixed; inset:0;
-    background:rgba(19,42,29,0.55);
-    display:none;
-    align-items:flex-start;
-    justify-content:center;
-    padding: 6vh 16px;
-    overflow-y:auto;
-    z-index:50;
-  }
-  .overlay.open{ display:flex; }
-  .modal{
-    background:var(--paper);
-    border-radius:12px;
-    max-width:480px;
     width:100%;
-    padding:24px;
-    box-shadow:0 24px 60px rgba(0,0,0,0.4);
-  }
-  .modal h3{
-    font-family:var(--font-display);
-    font-size:19px;
-    margin:0 0 18px;
-  }
-  .field{ margin-bottom:14px; }
-  .field label{
-    display:block;
-    font-size:12px;
-    font-weight:600;
-    font-family:var(--font-mono);
-    text-transform:uppercase;
-    letter-spacing:0.3px;
-    color:var(--ink-soft);
-    margin-bottom:5px;
-  }
-  .field input, .field select, .field textarea{
-    width:100%;
-    padding:9px 11px;
-    border:1px solid var(--paper-line);
-    border-radius:7px;
-    font-family:var(--font-body);
-    font-size:13.5px;
-    background:#fff;
-    color:var(--ink);
-  }
-  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .modal-actions{
-    display:flex;
-    justify-content:flex-end;
-    gap:10px;
-    margin-top:20px;
   }
 
-  .area-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:7px 0;
-    border-bottom:1px solid var(--paper-line);
-  }
-  .area-row input{
-    flex:1;
-    padding:7px 10px;
-    border:1px solid var(--paper-line);
-    border-radius:7px;
-    font-family:var(--font-body);
-    font-size:13.5px;
-  }
+}
 
-  .toast{
-    position:fixed;
-    bottom:24px; left:50%;
-    transform:translateX(-50%) translateY(20px);
-    background:var(--cover-green);
-    color:var(--paper);
-    padding:11px 20px;
-    border-radius:100px;
-    font-size:13px;
-    font-weight:500;
-    box-shadow:0 10px 24px rgba(0,0,0,0.3);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity 0.2s, transform 0.2s;
-    z-index:60;
-  }
-  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-  @media (max-width:560px){
-    .field-row{ grid-template-columns:1fr; }
-    .toolbar{ flex-direction:column; align-items:stretch; }
-    .cover{ flex-direction:column; align-items:flex-start; }
-  }
 </style>
 </head>
+
 <body>
 
 <div class="binder">
-  <header class="cover">
-    <div class="brand">
-      <div class="brand-mark">NF</div>
-      <div>
-        <h1>YTR RIZAL REPORT</h1>
-      </div>
+
+<header class="cover">
+
+  <div class="brand">
+
+    <div class="brand-mark">YTR</div>
+
+    <div>
+
+      <h1>YTR RIZAL REPORT</h1>
+
+      <p>CONNECTED TO SUPABASE</p>
+
     </div>
-    <div class="cover-actions">
-      <button class="ghost-btn" id="exportFriendsBtn">Export new friends CSV</button>
-      <button class="ghost-btn" id="exportActiveBtn">Export active members CSV</button>
-      <button class="ghost-btn" id="exportEventsBtn">Export events CSV</button>
-      <button class="ghost-btn" id="resetBtn">Reset data</button>
-    </div>
-  </header>
 
-  <nav class="tabs" role="tablist" aria-label="Sections">
-    <button class="tab" role="tab" data-tab="summary" aria-selected="true">Summary</button>
-    <button class="tab" role="tab" data-tab="friends" aria-selected="false">New Friends</button>
-    <button class="tab" role="tab" data-tab="activemembers" aria-selected="false">Active Members</button>
-    <button class="tab" role="tab" data-tab="events" aria-selected="false">Events</button>
-  </nav>
-
-  <main class="page">
-
-    <!-- SUMMARY -->
-    <section class="section active" id="section-summary">
-      <h2 class="section-title">Summary</h2>
-      <p class="section-sub">AUTO-TALLIED FROM YOUR RECORDS</p>
-
-      <div class="stat-row" id="statRow"></div>
-
-      <div class="chart-card">
-        <h3>New friends invited, by month</h3>
-        <div id="chartWrap"></div>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead><tr id="summaryHeadRow"></tr></thead>
-          <tbody id="summaryBody"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- NEW FRIENDS -->
-    <section class="section" id="section-friends">
-      <h2 class="section-title">New Friends</h2>
-      <p class="section-sub">EVERYONE INVITED, ACROSS ALL AREAS</p>
-
-      <div class="toolbar">
-        <div class="filter-group" id="areaFilters"></div>
-        <div class="btn-group">
-          <input type="text" class="search-input" id="friendSearch" placeholder="Search by name…">
-          <button class="btn btn-secondary" id="manageAreasBtn">Manage areas</button>
-          <button class="btn btn-primary" id="addFriendBtn">+ Add person</button>
-        </div>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th><th>Age</th><th>Contact No.</th><th>Facebook</th>
-              <th>Area / Campus</th><th>Date invited</th><th>Event</th><th>Status</th><th></th>
-            </tr>
-          </thead>
-          <tbody id="friendsBody"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ACTIVE MEMBERS -->
-    <section class="section" id="section-activemembers">
-      <h2 class="section-title">Active Members</h2>
-      <p class="section-sub">CURRENT AND COMMITTED MEMBERS LIST</p>
-
-      <div class="toolbar">
-        <div class="filter-group" id="activeStatusFilters">
-          <button class="chip active" data-status-filter="All">All Active</button>
-          <button class="chip" data-status-filter="Active">Active Only</button>
-        </div>
-        <div class="btn-group">
-          <input type="text" class="search-input" id="activeMemberSearch" placeholder="Search by name…">
-          <button class="btn btn-primary" id="addActiveBtn">+ Add member</button>
-        </div>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th><th>Age</th><th>Contact No.</th><th>Facebook</th><th>Status</th><th></th>
-            </tr>
-          </thead>
-          <tbody id="activeBody"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- EVENTS -->
-    <section class="section" id="section-events">
-      <h2 class="section-title">Events</h2>
-      <p class="section-sub">YEAR-ROUND EVENT LOG</p>
-
-      <div class="toolbar">
-        <div></div>
-        <div class="btn-group">
-          <button class="btn btn-primary" id="addEventBtn">+ Add event</button>
-        </div>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Name</th><th>Date</th><th>No. of attendees</th><th>No. of first timers</th><th></th></tr>
-          </thead>
-          <tbody id="eventsBody"></tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
-</div>
-
-<!-- Friend Modal -->
-<div class="overlay" id="friendOverlay">
-  <div class="modal">
-    <h3 id="friendModalTitle">Add person</h3>
-    <form id="friendForm">
-      <div class="field"><label for="f_name">Name</label><input id="f_name" required></div>
-      <div class="field-row">
-        <div class="field"><label for="f_age">Age</label><input id="f_age" type="number" min="0"></div>
-        <div class="field"><label for="f_contact">Contact no.</label><input id="f_contact"></div>
-      </div>
-      <div class="field"><label for="f_fb">Facebook</label><input id="f_fb" placeholder="Profile name or link"></div>
-      <div class="field-row">
-        <div class="field">
-          <label for="f_area">Area / campus</label>
-          <select id="f_area"></select>
-        </div>
-        <div class="field"><label for="f_date">Date invited</label><input id="f_date" type="date"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label for="f_event">Event</label><input id="f_event" placeholder="e.g. YTR Event"></div>
-        <div class="field">
-          <label for="f_status">Status</label>
-          <select id="f_status">
-            <option>New</option>
-            <option>Following Up</option>
-            <option>Active</option>
-            <option>Inactive</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-secondary" id="friendCancelBtn">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-      </div>
-    </form>
   </div>
+
+  <div class="cover-actions">
+
+    <button class="ghost-btn" id="refreshBtn">
+      ↻ Refresh
+    </button>
+
+    <button class="ghost-btn" id="exportBtn">
+      Export CSV
+    </button>
+
+  </div>
+
+</header>
+
+
+<nav class="tabs">
+
+  <button
+    class="tab"
+    data-tab="summary"
+    aria-selected="true">
+    Summary
+  </button>
+
+  <button
+    class="tab"
+    data-tab="friends"
+    aria-selected="false">
+    New Friends
+  </button>
+
+  <button
+    class="tab"
+    data-tab="active"
+    aria-selected="false">
+    Active Members
+  </button>
+
+  <button
+    class="tab"
+    data-tab="events"
+    aria-selected="false">
+    Events
+  </button>
+
+</nav>
+
+
+<main class="page">
+
+
+<!-- SUMMARY -->
+
+<section
+  class="section active"
+  id="section-summary">
+
+  <h2 class="section-title">
+    Summary
+  </h2>
+
+  <p class="section-sub">
+    AUTOMATICALLY CALCULATED FROM YOUR FRIEND RECORDS
+  </p>
+
+  <div
+    class="stat-row"
+    id="stats">
+  </div>
+
+  <div
+    class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Journey Status</th>
+          <th>People</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody
+        id="journeySummary">
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- NEW FRIENDS -->
+
+<section
+  class="section"
+  id="section-friends">
+
+  <h2 class="section-title">
+    New Friends
+  </h2>
+
+  <p class="section-sub">
+    EVERY PERSON AND THEIR JOURNEY
+  </p>
+
+  <div class="toolbar">
+
+    <div class="filter-group">
+
+      <button
+        class="chip active"
+        data-area="All">
+        All
+      </button>
+
+      <div id="areaFilters"></div>
+
+    </div>
+
+    <div class="btn-group">
+
+      <input
+        class="search-input"
+        id="search"
+        placeholder="Search name...">
+
+      <button
+        class="btn btn-primary"
+        id="addBtn">
+        + Add person
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Contact</th>
+          <th>Facebook</th>
+          <th>Area</th>
+          <th>Date Invited</th>
+          <th>Event</th>
+          <th>Consolidator</th>
+          <th>Challenge</th>
+          <th>Journey</th>
+          <th>Status</th>
+          <th></th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="friendsBody">
+
+        <tr>
+          <td colspan="13" class="loading">
+            Loading...
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- ACTIVE MEMBERS -->
+
+<section
+  class="section"
+  id="section-active">
+
+  <h2 class="section-title">
+    Active Members
+  </h2>
+
+  <p class="section-sub">
+    PEOPLE WHOSE STATUS IS ACTIVE
+  </p>
+
+  <div class="toolbar">
+
+    <input
+      class="search-input"
+      id="activeSearch"
+      placeholder="Search active member...">
+
+  </div>
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Contact</th>
+          <th>Area</th>
+          <th>Journey</th>
+          <th>Event</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="activeBody"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section
+  class="section"
+  id="section-events">
+
+  <h2 class="section-title">
+    Events
+  </h2>
+
+  <p class="section-sub">
+    AUTOMATICALLY COUNTED FROM THE EVENT FIELD OF EVERY PERSON
+  </p>
+
+
+  <div
+    class="event-summary"
+    id="eventCards">
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Event</th>
+          <th>Attendees</th>
+          <th>Active</th>
+          <th>New</th>
+          <th>Following Up</th>
+          <th>First Timers</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="eventsBody"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+</main>
+
 </div>
 
-<!-- Active Member Modal -->
-<div class="overlay" id="activeOverlay">
+
+<!-- PERSON MODAL -->
+
+<div
+  class="overlay"
+  id="personOverlay">
+
   <div class="modal">
-    <h3 id="activeModalTitle">Add member</h3>
-    <form id="activeForm">
-      <div class="field"><label for="a_name">Name</label><input id="a_name" required></div>
-      <div class="field-row">
-        <div class="field"><label for="a_age">Age</label><input id="a_age" type="number" min="0"></div>
-        <div class="field"><label for="a_contact">Contact no.</label><input id="a_contact"></div>
-      </div>
-      <div class="field"><label for="a_fb">Facebook</label><input id="a_fb" placeholder="Profile name or link"></div>
+
+    <h3 id="modalTitle">
+      Add Person
+    </h3>
+
+
+    <form id="personForm">
+
+
       <div class="field">
-        <label for="a_status">Status</label>
-        <select id="a_status">
-          <option>Active</option>
-          <option>New</option>
-          <option>Following Up</option>
-          <option>Inactive</option>
-        </select>
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-secondary" id="activeCancelBtn">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-      </div>
-    </form>
-  </div>
-</div>
 
-<!-- Event Modal -->
-<div class="overlay" id="eventOverlay">
-  <div class="modal">
-    <h3 id="eventModalTitle">Add event</h3>
-    <form id="eventForm">
-      <div class="field"><label for="e_name">Event name</label><input id="e_name" required></div>
+        <label>
+          Name
+        </label>
+
+        <input
+          id="name"
+          required>
+
+      </div>
+
+
       <div class="field-row">
-        <div class="field"><label for="e_date">Date</label><input id="e_date" type="date"></div>
-        <div class="field"><label for="e_attendees">No. of attendees</label><input id="e_attendees" type="number" min="0"></div>
+
+        <div class="field">
+
+          <label>
+            Age
+          </label>
+
+          <input
+            id="age"
+            type="number"
+            min="0">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Gender
+          </label>
+
+          <select id="gender">
+
+            <option value="">
+              Select gender
+            </option>
+
+            <option value="F">
+              Female
+            </option>
+
+            <option value="M">
+              Male
+            </option>
+
+          </select>
+
+        </div>
+
       </div>
-      <div class="field"><label for="e_firsttimers">No. of first timers</label><input id="e_firsttimers" type="number" min="0"></div>
+
+
+      <div class="field-row">
+
+        <div class="field">
+
+          <label>
+            Contact No.
+          </label>
+
+          <input id="contact">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Facebook
+          </label>
+
+          <input id="facebook">
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Area / Campus
+        </label>
+
+        <select id="area">
+
+          <option value="">
+            Select area
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field-row">
+
+        <div class="field">
+
+          <label>
+            Date Invited
+          </label>
+
+          <input
+            id="dateInvited"
+            type="date">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Event
+          </label>
+
+          <input
+            id="event"
+            placeholder="e.g. Back to Reality">
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Consolidator
+        </label>
+
+        <input
+          id="consolidator"
+          placeholder="Who entered/followed this information?">
+
+      </div>
+
+
+      <div class="field-row">
+
+        <div class="field">
+
+          <label>
+            Challenge Accepted
+          </label>
+
+          <select id="challenge">
+
+            <option value="Not Yet">
+              Not Yet
+            </option>
+
+            <option value="Yes">
+              Yes
+            </option>
+
+            <option value="No">
+              No
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Status
+          </label>
+
+          <select id="status">
+
+            <option value="New">
+              New
+            </option>
+
+            <option value="Following Up">
+              Following Up
+            </option>
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Journey Status
+        </label>
+
+        <select id="journey">
+
+          <option value="Purpose">
+            Purpose
+          </option>
+
+          <option value="Buhay YP">
+            Buhay YP
+          </option>
+
+          <option value="Salvation">
+            Salvation
+          </option>
+
+          <option value="Repentance">
+            Repentance
+          </option>
+
+          <option value="Believe">
+            Believe
+          </option>
+
+          <option value="Empowerment">
+            Empowerment
+          </option>
+
+          <option value="Show Your Faith">
+            Show Your Faith
+          </option>
+
+          <option value="Life Retreat">
+            Life Retreat
+          </option>
+
+        </select>
+
+      </div>
+
+
       <div class="modal-actions">
-        <button type="button" class="btn btn-secondary" id="eventCancelBtn">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="cancelBtn">
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary">
+          Save
+        </button>
+
       </div>
+
     </form>
+
   </div>
+
 </div>
 
-<!-- Manage Areas Modal -->
-<div class="overlay" id="areaOverlay">
-  <div class="modal">
-    <h3>Manage areas</h3>
-    <div id="areaList" style="margin-bottom:16px;"></div>
-    <form id="addAreaForm" style="display:flex; gap:8px;">
-      <input id="new_area_input" placeholder="New area name" style="flex:1; padding:9px 11px; border:1px solid var(--paper-line); border-radius:7px; font-family:var(--font-body); font-size:13.5px;" required>
-      <button type="submit" class="btn btn-primary">Add</button>
-    </form>
-    <div class="modal-actions">
-      <button type="button" class="btn btn-secondary" id="areaCloseBtn">Done</button>
-    </div>
-  </div>
+
+<div
+  class="toast"
+  id="toast">
 </div>
 
-<div class="toast" id="toast"></div>
 
 <script>
-(function(){
-  "use strict";
 
-  // ---------- Storage shim ----------
-  // If the host doesn't provide window.storage (e.g. plain static hosting),
-  // use localStorage as a fallback so data persists in the browser.
-  if(!window.storage){
-    window.storage = {
-      // get(key, default) -> returns { value } or default (keeps original code's expectations)
-      get: async (key, def) => {
-        try{
-          const v = localStorage.getItem(key);
-          return v === null ? def : { value: v };
-        }catch(e){
-          return def;
-        }
-      },
-      // set(key, value, persistent) -> returns true/false
-      set: async (key, value, persistent) => {
-        try{
-          localStorage.setItem(key, value);
-          return true;
-        }catch(e){
-          return false;
-        }
-      }
-    };
+/* =========================================================
+   SUPABASE CONFIG
+   ========================================================= */
+
+const SUPABASE_URL =
+  "https://wnmphcwjxzimweqynkza.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_IAJIxu00ASqSmutTvkza8g_jm0mdHzP3";
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let friends = [];
+let areas = [];
+
+let editingId = null;
+let selectedArea = "All";
+
+
+const JOURNEY_STATUSES = [
+
+  "Purpose",
+  "Buhay YP",
+  "Salvation",
+  "Repentance",
+  "Believe",
+  "Empowerment",
+  "Show Your Faith",
+  "Life Retreat"
+
+];
+
+
+/* =========================================================
+   SUPABASE REQUEST
+   ========================================================= */
+
+async function supabaseRequest(
+  table,
+  method = "GET",
+  data = null,
+  query = ""
+){
+
+  const options = {
+
+    method,
+
+    headers: {
+
+      "apikey": SUPABASE_KEY,
+
+      "Authorization":
+        "Bearer " + SUPABASE_KEY,
+
+      "Content-Type":
+        "application/json",
+
+      "Prefer":
+        method === "POST"
+          ? "return=representation"
+          : "return=minimal"
+
+    }
+
+  };
+
+
+  if(data){
+
+    options.body =
+      JSON.stringify(data);
+
   }
 
-  const DEFAULT_AREAS = ["Marikina", "Rodriguez", "San Mateo"];
-  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-  let areas = DEFAULT_AREAS.slice();
-  let friends = [];
-  let activeMembers = [];
-  let events = [];
-  let activeAreaFilter = "All";
-  let activeStatusFilter = "All";
-  let editingFriendId = null;
-  let editingActiveId = null;
-  let editingEventId = null;
-  let saveTimer = null;
+  const response =
+    await fetch(
+      `${SUPABASE_URL}/rest/v1/${table}${query}`,
+      options
+    );
 
-  const $ = (sel) => document.querySelector(sel);
-  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+  if(!response.ok){
 
-  function showToast(msg){
-    const t = $("#toast");
-    t.textContent = msg;
-    t.classList.add("show");
-    clearTimeout(t._timer);
-    t._timer = setTimeout(() => t.classList.remove("show"), 2200);
+    const error =
+      await response.text();
+
+    throw new Error(error);
+
   }
 
-  // ---------- Storage ----------
-  async function loadData(){
-    try{
-      const f = await window.storage.get("friends-data", false);
-      friends = f ? JSON.parse(f.value) : [];
-    }catch(e){ friends = []; }
-    try{
-      const am = await window.storage.get("active-members-data", false);
-      activeMembers = am ? JSON.parse(am.value) : [];
-    }catch(e){ activeMembers = []; }
-    try{
-      const ev = await window.storage.get("events-data", false);
-      events = ev ? JSON.parse(ev.value) : [];
-    }catch(e){ events = []; }
-    try{
-      const ar = await window.storage.get("areas-data", false);
-      areas = ar ? JSON.parse(ar.value) : DEFAULT_AREAS.slice();
-      if(!Array.isArray(areas) || areas.length === 0) areas = DEFAULT_AREAS.slice();
-    }catch(e){ areas = DEFAULT_AREAS.slice(); }
-    buildAreaFilters();
+
+  if(
+    response.status === 204 ||
+    method === "DELETE"
+  ){
+
+    return null;
+
+  }
+
+
+  return response.json();
+
+}
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+const $ =
+  selector =>
+    document.querySelector(selector);
+
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/[&<>"']/g, char => ({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+
+    }[char]));
+
+}
+
+
+function showToast(message){
+
+  const toast =
+    $("#toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+    toast._timer
+  );
+
+  toast._timer =
+    setTimeout(
+      () => toast.classList.remove("show"),
+      2200
+    );
+
+}
+
+
+/* =========================================================
+   LOAD DATA
+   ========================================================= */
+
+async function loadData(){
+
+  try{
+
+    friends =
+      await supabaseRequest(
+        "friends",
+        "GET",
+        null,
+        "?select=*&order=created_at.desc"
+      );
+
+
+    areas =
+      await supabaseRequest(
+        "areas",
+        "GET",
+        null,
+        "?select=*&order=name.asc"
+      );
+
+
+    if(!Array.isArray(friends))
+      friends = [];
+
+
+    if(!Array.isArray(areas))
+      areas = [];
+
+
+    renderAreaSelect();
+
     renderAll();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Unable to load Supabase data."
+    );
+
   }
 
-  function queueSave(){
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(async () => {
-      try{
-        await window.storage.set("friends-data", JSON.stringify(friends), false);
-        await window.storage.set("active-members-data", JSON.stringify(activeMembers), false);
-        await window.storage.set("events-data", JSON.stringify(events), false);
-        await window.storage.set("areas-data", JSON.stringify(areas), false);
-      }catch(e){
-        showToast("Couldn't save — check your connection.");
-      }
-    }, 250);
+}
+
+
+/* =========================================================
+   AREA SELECT
+   ========================================================= */
+
+function renderAreaSelect(){
+
+  const select =
+    $("#area");
+
+  select.innerHTML =
+    `<option value="">Select area</option>`;
+
+
+  areas.forEach(area => {
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      area.name;
+
+    option.textContent =
+      area.name;
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+/* =========================================================
+   STATUS PILL
+   ========================================================= */
+
+function statusClass(status){
+
+  if(status === "Active")
+    return "pill-active";
+
+  if(status === "Following Up")
+    return "pill-following";
+
+  if(status === "Inactive")
+    return "pill-inactive";
+
+  return "pill-new";
+
+}
+
+
+/* =========================================================
+   RENDER ALL
+   ========================================================= */
+
+function renderAll(){
+
+  renderStats();
+
+  renderFriends();
+
+  renderActiveMembers();
+
+  renderEvents();
+
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+function renderStats(){
+
+  const active =
+    friends.filter(
+      person =>
+        person.status === "Active"
+    ).length;
+
+
+  const events =
+    new Set(
+      friends
+        .map(person =>
+          (person.event || "").trim()
+        )
+        .filter(Boolean)
+    ).size;
+
+
+  const challengeYes =
+    friends.filter(
+      person =>
+        person.challenge_accepted === "Yes"
+    ).length;
+
+
+  $("#stats").innerHTML = `
+
+    <div class="stat-card">
+
+      <div class="num">
+        ${friends.length}
+      </div>
+
+      <div class="label">
+        Total New Friends
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="num">
+        ${active}
+      </div>
+
+      <div class="label">
+        Active Members
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="num">
+        ${events}
+      </div>
+
+      <div class="label">
+        Events
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="num">
+        ${challengeYes}
+      </div>
+
+      <div class="label">
+        Challenge Accepted
+      </div>
+
+    </div>
+
+  `;
+
+
+  const counts =
+    Object.fromEntries(
+      JOURNEY_STATUSES.map(
+        status => [status,0]
+      )
+    );
+
+
+  friends.forEach(person => {
+
+    const journey =
+      person.journey_status ||
+      "Purpose";
+
+    if(counts[journey] !== undefined)
+      counts[journey]++;
+
+  });
+
+
+  $("#journeySummary").innerHTML =
+    JOURNEY_STATUSES.map(
+      status => `
+
+        <tr>
+
+          <td>
+            ${escapeHtml(status)}
+          </td>
+
+          <td class="num-cell">
+            ${counts[status]}
+          </td>
+
+        </tr>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   AREA FILTER
+   ========================================================= */
+
+function renderAreaFilters(){
+
+  const container =
+    $("#areaFilters");
+
+  container.innerHTML = "";
+
+  areas.forEach(area => {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "chip" +
+      (
+        selectedArea === area.name
+          ? " active"
+          : ""
+      );
+
+    button.textContent =
+      area.name;
+
+
+    button.onclick = () => {
+
+      selectedArea =
+        area.name;
+
+      renderAreaFilters();
+
+      renderFriends();
+
+    };
+
+
+    container.appendChild(button);
+
+  });
+
+}
+
+
+/* =========================================================
+   NEW FRIENDS TABLE
+   ========================================================= */
+
+function renderFriends(){
+
+  renderAreaFilters();
+
+  const body =
+    $("#friendsBody");
+
+  const search =
+    $("#search")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  let list =
+    [...friends];
+
+
+  if(selectedArea !== "All"){
+
+    list =
+      list.filter(
+        person =>
+          person.area === selectedArea
+      );
+
   }
 
-  // ---------- Rendering: New Friends ----------
-  function buildAreaFilters(){
-    const wrap = $("#areaFilters");
-    wrap.innerHTML = "";
-    ["All", ...areas].forEach(area => {
-      const b = document.createElement("button");
-      b.className = "chip" + (area === activeAreaFilter ? " active" : "");
-      b.textContent = area;
-      b.addEventListener("click", () => { activeAreaFilter = area; renderFriends(); buildAreaFilters(); });
-      wrap.appendChild(b);
-    });
+
+  if(search){
+
+    list =
+      list.filter(
+        person =>
+          (person.name || "")
+            .toLowerCase()
+            .includes(search)
+      );
+
   }
 
-  function statusPillClass(status){
-    return {
-      "New":"pill-new", "Following Up":"pill-following",
-      "Active":"pill-active", "Inactive":"pill-inactive"
-    }[status] || "pill-new";
-  }
 
-  function renderFriends(){
-    const body = $("#friendsBody");
-    const searchTerm = $("#friendSearch").value.trim().toLowerCase();
-    let list = friends.slice().sort((a,b) => (b.dateInvited||"").localeCompare(a.dateInvited||""));
-    if(activeAreaFilter !== "All") list = list.filter(p => p.area === activeAreaFilter);
-    if(searchTerm) list = list.filter(p => (p.name||"").toLowerCase().includes(searchTerm));
+  if(list.length === 0){
 
-    body.innerHTML = "";
-    if(list.length === 0){
-      body.innerHTML = `<tr class="empty-row"><td colspan="9">No one recorded yet. Add the first person to get started.</td></tr>`;
-      return;
-    }
-    list.forEach(p => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${escapeHtml(p.name)}</td>
-        <td class="num-cell">${p.age ?? ""}</td>
-        <td class="num-cell">${escapeHtml(p.contact||"")}</td>
-        <td>${escapeHtml(p.facebook||"")}</td>
-        <td>${escapeHtml(p.area||"")}</td>
-        <td class="num-cell">${p.dateInvited||""}</td>
-        <td>${escapeHtml(p.event||"")}</td>
-        <td><span class="pill ${statusPillClass(p.status)}">${escapeHtml(p.status||"New")}</span></td>
-        <td>
-          <div class="row-actions">
-            <button class="btn-edit" data-id="${p.id}">Edit</button>
-            <button class="btn-danger" data-id="${p.id}">Delete</button>
-          </div>
-        </td>`;
-      tr.querySelector(".btn-edit").addEventListener("click", () => openFriendModal(p.id));
-      tr.querySelector(".btn-danger").addEventListener("click", () => deleteFriend(p.id));
-      body.appendChild(tr);
-    });
-  }
+    body.innerHTML = `
 
-  // ---------- Rendering: Active Members ----------
-  function renderActiveMembers(){
-    const body = $("#activeBody");
-    const searchTerm = $("#activeMemberSearch").value.trim().toLowerCase();
-    let list = activeMembers.slice().sort((a,b) => (a.name||"").localeCompare(b.name||""));
-    
-    if(activeStatusFilter !== "All") list = list.filter(m => m.status === activeStatusFilter);
-    if(searchTerm) list = list.filter(m => (m.name||"").toLowerCase().includes(searchTerm));
+      <tr class="empty-row">
 
-    body.innerHTML = "";
-    if(list.length === 0){
-      body.innerHTML = `<tr class="empty-row"><td colspan="6">No active members recorded yet.</td></tr>`;
-      return;
-    }
-    list.forEach(m => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${escapeHtml(m.name)}</td>
-        <td class="num-cell">${m.age ?? ""}</td>
-        <td class="num-cell">${escapeHtml(m.contact||"")}</td>
-        <td>${escapeHtml(m.facebook||"")}</td>
-        <td><span class="pill ${statusPillClass(m.status)}">${escapeHtml(m.status||"Active")}</span></td>
-        <td>
-          <div class="row-actions">
-            <button class="btn-edit" data-id="${m.id}">Edit</button>
-            <button class="btn-danger" data-id="${m.id}">Delete</button>
-          </div>
-        </td>`;
-      tr.querySelector(".btn-edit").addEventListener("click", () => openActiveModal(m.id));
-      tr.querySelector(".btn-danger").addEventListener("click", () => deleteActiveMember(m.id));
-      body.appendChild(tr);
-    });
-  }
+        <td colspan="13">
 
-  function escapeHtml(str){
-    return String(str).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  }
+          No records found.
 
-  // ---------- Rendering: Events ----------
-  function renderEvents(){
-    const body = $("#eventsBody");
-    const list = events.slice().sort((a,b) => (b.date||"").localeCompare(a.date||""));
-    body.innerHTML = "";
-    if(list.length === 0){
-      body.innerHTML = `<tr class="empty-row"><td colspan="5">No events logged yet. Add your first event.</td></tr>`;
-      return;
-    }
-    let totalAttendees = 0, totalFirst = 0;
-    list.forEach(ev => {
-      totalAttendees += Number(ev.attendees)||0;
-      totalFirst += Number(ev.firstTimers)||0;
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${escapeHtml(ev.name)}</td>
-        <td class="num-cell">${ev.date||""}</td>
-        <td class="num-cell">${ev.attendees ?? 0}</td>
-        <td class="num-cell">${ev.firstTimers ?? 0}</td>
-        <td>
-          <div class="row-actions">
-            <button class="btn-edit" data-id="${ev.id}">Edit</button>
-            <button class="btn-danger" data-id="${ev.id}">Delete</button>
-          </div>
-        </td>`;
-      tr.querySelector(".btn-edit").addEventListener("click", () => openEventModal(ev.id));
-      tr.querySelector(".btn-danger").addEventListener("click", () => deleteEvent(ev.id));
-      body.appendChild(tr);
-    });
-    const totalsTr = document.createElement("tr");
-    totalsTr.className = "totals-row";
-    totalsTr.innerHTML = `<td>Total</td><td></td><td class="num-cell">${totalAttendees}</td><td class="num-cell">${totalFirst}</td><td></td>`;
-    body.appendChild(totalsTr);
-  }
+        </td>
 
-  // ---------- Rendering: Summary ----------
-  function monthKey(dateStr){
-    if(!dateStr) return null;
-    const d = new Date(dateStr + "T00:00:00");
-    if(isNaN(d)) return null;
-    return d.getMonth();
-  }
+      </tr>
 
-  function renderSummary(){
-    const totalActiveFromFriends = friends.filter(p=>p.status==="Active").length;
-    const totalActiveFromList = activeMembers.filter(m=>m.status==="Active").length;
-    
-    $("#statRow").innerHTML = `
-      <div class="stat-card"><div class="num">${friends.length}</div><div class="label">Total new friends</div></div>
-      <div class="stat-card"><div class="num">${events.length}</div><div class="label">Events logged</div></div>
-      <div class="stat-card"><div class="num">${events.reduce((s,e)=>s+(Number(e.attendees)||0),0)}</div><div class="label">Total attendance</div></div>
-      <div class="stat-card"><div class="num">${totalActiveFromFriends + totalActiveFromList}</div><div class="label">Active members</div></div>
     `;
 
-    // matrix: months x areas
-    const matrix = MONTHS.map(() => Object.fromEntries(areas.map(a => [a,0])));
-    friends.forEach(p => {
-      const mi = monthKey(p.dateInvited);
-      if(mi === null) return;
-      const area = areas.includes(p.area) ? p.area : null;
-      if(area) matrix[mi][area]++;
-    });
+    return;
 
-    const headRow = $("#summaryHeadRow");
-    headRow.innerHTML = `<th>Month</th>` + areas.map(a => `<th>${a}</th>`).join("") + `<th>Total</th>`;
-
-    const body = $("#summaryBody");
-    body.innerHTML = "";
-    const areaTotals = Object.fromEntries(areas.map(a => [a,0]));
-    let grand = 0;
-    MONTHS.forEach((m, i) => {
-      let rowTotal = 0;
-      const tr = document.createElement("tr");
-      let cells = `<td>${m}</td>`;
-      areas.forEach(a => {
-        const v = matrix[i][a];
-        rowTotal += v; areaTotals[a] += v;
-        cells += `<td class="num-cell">${v || ""}</td>`;
-      });
-      grand += rowTotal;
-      cells += `<td class="num-cell">${rowTotal || ""}</td>`;
-      tr.innerHTML = cells;
-      body.appendChild(tr);
-    });
-    const totalsTr = document.createElement("tr");
-    totalsTr.className = "totals-row";
-    totalsTr.innerHTML = `<td>Total</td>` + areas.map(a => `<td class="num-cell">${areaTotals[a]}</td>`).join("") + `<td class="num-cell">${grand}</td>`;
-    body.appendChild(totalsTr);
-
-    renderChart(matrix);
   }
 
-  function renderChart(matrix){
-    const monthly = matrix.map(m => areas.reduce((s,a) => s + m[a], 0));
-    const max = Math.max(1, ...monthly);
-    const w = 760, h = 160, padL = 4, barGap = 6;
-    const barW = (w - padL*2) / monthly.length - barGap;
-    let bars = "";
-    monthly.forEach((v, i) => {
-      const barH = (v / max) * (h - 40);
-      const x = padL + i * (barW + barGap);
-      const y = h - 24 - barH;
-      bars += `<rect x="${x}" y="${y}" width="${barW}" height="${barH}" rx="3" fill="${v>0 ? 'var(--gold)':'var(--paper-line)'}"></rect>`;
-      if(v>0) bars += `<text x="${x+barW/2}" y="${y-6}" text-anchor="middle" class="bar-value">${v}</text>`;
-      bars += `<text x="${x+barW/2}" y="${h-8}" text-anchor="middle" class="bar-label">${MONTHS[i]}</text>`;
-    });
-    $("#chartWrap").innerHTML = `<svg viewBox="0 0 ${w} ${h}" style="width:100%; height:auto; display:block;">${bars}</svg>`;
+
+  body.innerHTML =
+    list.map(person => `
+
+      <tr>
+
+        <td>
+          <strong>
+            ${escapeHtml(person.name)}
+          </strong>
+        </td>
+
+        <td>
+          ${person.age ?? ""}
+        </td>
+
+        <td>
+          ${escapeHtml(person.gender || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(person.contact || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(person.facebook || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(person.area || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(person.date_invited || "")}
+        </td>
+
+        <td>
+          <strong>
+            ${escapeHtml(person.event || "")}
+          </strong>
+        </td>
+
+        <td>
+          ${escapeHtml(person.consolidator || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(
+            person.challenge_accepted ||
+            "Not Yet"
+          )}
+        </td>
+
+        <td>
+          ${escapeHtml(
+            person.journey_status ||
+            "Purpose"
+          )}
+        </td>
+
+        <td>
+
+          <span class="pill ${statusClass(person.status)}">
+
+            ${escapeHtml(
+              person.status || "New"
+            )}
+
+          </span>
+
+        </td>
+
+        <td>
+
+          <div class="btn-group">
+
+            <button
+              class="btn-edit"
+              onclick="editPerson('${person.id}')">
+
+              Edit
+
+            </button>
+
+
+            <button
+              class="btn-danger"
+              onclick="deletePerson('${person.id}')">
+
+              Delete
+
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   ACTIVE MEMBERS
+   ========================================================= */
+
+function renderActiveMembers(){
+
+  const body =
+    $("#activeBody");
+
+  const search =
+    $("#activeSearch")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  let list =
+    friends.filter(
+      person =>
+        person.status === "Active"
+    );
+
+
+  if(search){
+
+    list =
+      list.filter(
+        person =>
+          (person.name || "")
+            .toLowerCase()
+            .includes(search)
+      );
+
   }
 
-  function renderAll(){
-    renderSummary();
-    renderFriends();
-    renderActiveMembers();
-    renderEvents();
+
+  if(list.length === 0){
+
+    body.innerHTML = `
+
+      <tr class="empty-row">
+
+        <td colspan="7">
+
+          No active members found.
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
   }
 
-  // ---------- Friend CRUD ----------
-  function openFriendModal(id){
-    editingFriendId = id || null;
-    const p = id ? friends.find(f => f.id === id) : null;
-    $("#friendModalTitle").textContent = p ? "Edit person" : "Add person";
-    $("#f_name").value = p?.name || "";
-    $("#f_age").value = p?.age ?? "";
-    $("#f_contact").value = p?.contact || "";
-    $("#f_fb").value = p?.facebook || "";
-    const areaSelect = $("#f_area");
-    areaSelect.innerHTML = areas.map(a => `<option ${a === p?.area ? "selected" : ""}>${escapeHtml(a)}</option>`).join("");
-    if(p && !areas.includes(p.area) && p.area){
-      areaSelect.insertAdjacentHTML("afterbegin", `<option selected>${escapeHtml(p.area)}</option>`);
-    }
-    $("#f_date").value = p?.dateInvited || "";
-    $("#f_event").value = p?.event || "";
-    $("#f_status").value = p?.status || "New";
-    $("#friendOverlay").classList.add("open");
-    $("#f_name").focus();
-  }
 
-  function closeFriendModal(){
-    $("#friendOverlay").classList.remove("open");
-    editingFriendId = null;
-  }
+  body.innerHTML =
+    list.map(person => `
 
-  function deleteFriend(id){
-    if(!confirm("Delete this person's record? This can't be undone.")) return;
-    friends = friends.filter(f => f.id !== id);
-    queueSave(); renderAll();
-    showToast("Person deleted.");
-  }
+      <tr>
 
-  $("#friendForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = {
-      name: $("#f_name").value.trim(),
-      age: $("#f_age").value ? Number($("#f_age").value) : null,
-      contact: $("#f_contact").value.trim(),
-      facebook: $("#f_fb").value.trim(),
-      area: $("#f_area").value,
-      dateInvited: $("#f_date").value,
-      event: $("#f_event").value.trim(),
-      status: $("#f_status").value
-    };
-    if(!data.name){ showToast("Please enter a name."); return; }
-    if(editingFriendId){
-      const idx = friends.findIndex(f => f.id === editingFriendId);
-      friends[idx] = { ...friends[idx], ...data };
-      showToast("Person updated.");
-    } else {
-      friends.push({ id: uid(), ...data });
-      showToast("Person added.");
-    }
-    queueSave(); renderAll(); buildAreaFilters(); closeFriendModal();
-  });
+        <td>
+          <strong>
+            ${escapeHtml(person.name)}
+          </strong>
+        </td>
 
-  $("#friendCancelBtn").addEventListener("click", closeFriendModal);
-  $("#addFriendBtn").addEventListener("click", () => openFriendModal(null));
-  $("#friendSearch").addEventListener("input", renderFriends);
+        <td>
+          ${person.age ?? ""}
+        </td>
+
+        <td>
+          ${escapeHtml(person.gender || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(person.contact || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(person.area || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(person.journey_status || "Purpose")}
+        </td>
+
+        <td>
+          ${escapeHtml(person.event || "")}
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
 
 
-  // ---------- Active Member CRUD ----------
-  function openActiveModal(id){
-    editingActiveId = id || null;
-    const m = id ? activeMembers.find(am => am.id === id) : null;
-    $("#activeModalTitle").textContent = m ? "Edit member" : "Add member";
-    $("#a_name").value = m?.name || "";
-    $("#a_age").value = m?.age ?? "";
-    $("#a_contact").value = m?.contact || "";
-    $("#a_fb").value = m?.facebook || "";
-    $("#a_status").value = m?.status || "Active";
-    $("#activeOverlay").classList.add("open");
-    $("#a_name").focus();
-  }
+/* =========================================================
+   ⭐ EVENTS — AUTOMATICALLY GENERATED FROM FRIENDS
+   ========================================================= */
 
-  function closeActiveModal(){
-    $("#activeOverlay").classList.remove("open");
-    editingActiveId = null;
-  }
+function getEventData(){
 
-  function deleteActiveMember(id){
-    if(!confirm("Delete this member's record? This can't be undone.")) return;
-    activeMembers = activeMembers.filter(m => m.id !== id);
-    queueSave(); renderAll();
-    showToast("Member deleted.");
-  }
-
-  $("#activeForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = {
-      name: $("#a_name").value.trim(),
-      age: $("#a_age").value ? Number($("#a_age").value) : null,
-      contact: $("#a_contact").value.trim(),
-      facebook: $("#a_fb").value.trim(),
-      status: $("#a_status").value
-    };
-    if(!data.name){ showToast("Please enter a name."); return; }
-    if(editingActiveId){
-      const idx = activeMembers.findIndex(m => m.id === editingActiveId);
-      activeMembers[idx] = { ...activeMembers[idx], ...data };
-      showToast("Member updated.");
-    } else {
-      activeMembers.push({ id: uid(), ...data });
-      showToast("Member added.");
-    }
-    queueSave(); renderAll(); closeActiveModal();
-  });
-
-  $("#activeCancelBtn").addEventListener("click", closeActiveModal);
-  $("#addActiveBtn").addEventListener("click", () => openActiveModal(null));
-  $("#activeMemberSearch").addEventListener("input", renderActiveMembers);
-
-  $$("#activeStatusFilters .chip").forEach(chip => {
-    chip.addEventListener("click", () => {
-      $$("#activeStatusFilters .chip").forEach(c => c.classList.remove("active"));
-      chip.classList.add("active");
-      activeStatusFilter = chip.dataset.statusFilter;
-      renderActiveMembers();
-    });
-  });
+  const eventMap = {};
 
 
-  // ---------- Event CRUD ----------
-  function openEventModal(id){
-    editingEventId = id || null;
-    const ev = id ? events.find(e => e.id === id) : null;
-    $("#eventModalTitle").textContent = ev ? "Edit event" : "Add event";
-    $("#e_name").value = ev?.name || "";
-    $("#e_date").value = ev?.date || "";
-    $("#e_attendees").value = ev?.attendees ?? "";
-    $("#e_firsttimers").value = ev?.firstTimers ?? "";
-    $("#eventOverlay").classList.add("open");
-    $("#e_name").focus();
-  }
-  function closeEventModal(){
-    $("#eventOverlay").classList.remove("open");
-    editingEventId = null;
-  }
-  function deleteEvent(id){
-    if(!confirm("Delete this event record? This can't be undone.")) return;
-    events = events.filter(e => e.id !== id);
-    queueSave(); renderAll();
-    showToast("Event deleted.");
-  }
+  friends.forEach(person => {
 
-  $("#eventForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = {
-      name: $("#e_name").value.trim(),
-      date: $("#e_date").value,
-      attendees: $("#e_attendees").value ? Number($("#e_attendees").value) : 0,
-      firstTimers: $("#e_firsttimers").value ? Number($("#e_firsttimers").value) : 0
-    };
-    if(!data.name){ showToast("Please enter an event name."); return; }
-    if(editingEventId){
-      const idx = events.findIndex(ev => ev.id === editingEventId);
-      events[idx] = { ...events[idx], ...data };
-      showToast("Event updated.");
-    } else {
-      events.push({ id: uid(), ...data });
-      showToast("Event added.");
-    }
-    queueSave(); renderAll(); closeEventModal();
-  });
-  $("#eventCancelBtn").addEventListener("click", closeEventModal);
-  $("#addEventBtn").addEventListener("click", () => openEventModal(null));
+    const event =
+      (person.event || "").trim();
 
-  // close modals on overlay click / Escape
-  [["#friendOverlay", closeFriendModal], ["#activeOverlay", closeActiveModal], ["#eventOverlay", closeEventModal]].forEach(([sel, closer]) => {
-    $(sel).addEventListener("click", (e) => { if(e.target.id === sel.slice(1)) closer(); });
-  });
-  document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape"){ closeFriendModal(); closeActiveModal(); closeEventModal(); $("#areaOverlay").classList.remove("open"); }
-  });
 
-  // ---------- Area management ----------
-  function renderAreaList(){
-    const wrap = $("#areaList");
-    if(areas.length === 0){
-      wrap.innerHTML = `<p style="color:var(--ink-soft); font-size:13px; font-style:italic;">No areas yet. Add one below.</p>`;
+    if(!event)
       return;
+
+
+    if(!eventMap[event]){
+
+      eventMap[event] = {
+
+        name:event,
+
+        attendees:0,
+
+        active:0,
+
+        newCount:0,
+
+        following:0,
+
+        firstTimers:0
+
+      };
+
     }
-    wrap.innerHTML = "";
-    areas.forEach((area, idx) => {
-      const row = document.createElement("div");
-      row.className = "area-row";
-      row.innerHTML = `
-        <input type="text" value="${escapeHtml(area)}" data-idx="${idx}">
-        <button class="btn-danger" data-idx="${idx}">Delete</button>
-      `;
-      const input = row.querySelector("input");
-      input.addEventListener("change", () => renameArea(idx, input.value.trim()));
-      row.querySelector(".btn-danger").addEventListener("click", () => deleteArea(idx));
-      wrap.appendChild(row);
-    });
+
+
+    eventMap[event].attendees++;
+
+
+    if(person.status === "Active")
+      eventMap[event].active++;
+
+
+    if(person.status === "New")
+      eventMap[event].newCount++;
+
+
+    if(person.status === "Following Up")
+      eventMap[event].following++;
+
+
+    /*
+      Challenge Accepted = Yes
+      is treated as a first timer/accepted participant.
+    */
+
+    if(person.challenge_accepted === "Yes")
+      eventMap[event].firstTimers++;
+
+  });
+
+
+  return Object.values(eventMap)
+    .sort(
+      (a,b) =>
+        a.name.localeCompare(b.name)
+    );
+
+}
+
+
+function renderEvents(){
+
+  const data =
+    getEventData();
+
+
+  const cards =
+    $("#eventCards");
+
+
+  const body =
+    $("#eventsBody");
+
+
+  if(data.length === 0){
+
+    cards.innerHTML = "";
+
+    body.innerHTML = `
+
+      <tr class="empty-row">
+
+        <td colspan="6">
+
+          No events yet.
+
+          Add an event to a person's information
+          and it will automatically appear here.
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
   }
 
-  function renameArea(idx, newName){
-    if(!newName){ renderAreaList(); return; }
-    const oldName = areas[idx];
-    if(newName === oldName) return;
-    if(areas.includes(newName)){ showToast("That area already exists."); renderAreaList(); return; }
-    areas[idx] = newName;
-    friends.forEach(p => { if(p.area === oldName) p.area = newName; });
-    queueSave(); buildAreaFilters(); renderAll(); renderAreaList();
-    showToast("Area renamed.");
-  }
 
-  function deleteArea(idx){
-    const name = areas[idx];
-    if(!confirm(`Remove "${name}" from the area list? People already recorded under it will keep their existing value.`)) return;
-    areas.splice(idx, 1);
-    if(activeAreaFilter === name) activeAreaFilter = "All";
-    queueSave(); buildAreaFilters(); renderAll(); renderAreaList();
-    showToast("Area removed.");
-  }
+  /*
+    EVENT CARDS
+  */
 
-  $("#addAreaForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const input = $("#new_area_input");
-    const name = input.value.trim();
-    if(!name) return;
-    if(areas.includes(name)){ showToast("That area already exists."); return; }
-    areas.push(name);
-    input.value = "";
-    queueSave(); buildAreaFilters(); renderAll(); renderAreaList();
-    showToast("Area added.");
-  });
+  cards.innerHTML =
+    data.map(event => `
 
-  $("#manageAreasBtn").addEventListener("click", () => {
-    renderAreaList();
-    $("#areaOverlay").classList.add("open");
-  });
-  $("#areaCloseBtn").addEventListener("click", () => $("#areaOverlay").classList.remove("open"));
-  $("#areaOverlay").addEventListener("click", (e) => { if(e.target.id === "areaOverlay") $("#areaOverlay").classList.remove("open"); });
+      <div class="event-card">
 
-  // ---------- Tabs ----------
-  $$(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      $$(".tab").forEach(t => t.setAttribute("aria-selected","false"));
-      tab.setAttribute("aria-selected","true");
-      $$(".section").forEach(s => s.classList.remove("active"));
-      $("#section-" + tab.dataset.tab).classList.add("active");
-    });
-  });
+        <div class="event-card-name">
 
-  // ---------- CSV export ----------
-  function downloadCsv(filename, rows, headers){
-    const escapeCsv = (v) => `"${String(v ?? "").replace(/"/g,'""')}"`;
-    const csv = [headers.join(",")].concat(
-      rows.map(r => headers.map(h => escapeCsv(r[h])).join(","))
-    ).join("\r\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = filename;
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
+          ${escapeHtml(event.name)}
 
-  $("#exportFriendsBtn").addEventListener("click", () => {
-    if(friends.length === 0){ showToast("No new friends to export yet."); return; }
-    downloadCsv("new-friends.csv", friends, ["name","age","contact","facebook","area","dateInvited","event","status"]);
-  });
-  $("#exportActiveBtn").addEventListener("click", () => {
-    if(activeMembers.length === 0){ showToast("No active members to export yet."); return; }
-    downloadCsv("active-members.csv", activeMembers, ["name","age","contact","facebook","status"]);
-  });
-  $("#exportEventsBtn").addEventListener("click", () => {
-    if(events.length === 0){ showToast("No events to export yet."); return; }
-    downloadCsv("events.csv", events, ["name","date","attendees","firstTimers"]);
-  });
+        </div>
 
-  $("#resetBtn").addEventListener("click", async () => {
-    if(!confirm("This will permanently delete all recorded people and events. Continue?")) return;
-    friends = []; activeMembers = []; events = [];
+        <div class="event-card-number">
+
+          ${event.attendees}
+
+        </div>
+
+        <div class="event-card-label">
+
+          Total Attendees
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+
+  /*
+    EVENT TABLE
+  */
+
+  body.innerHTML =
+    data.map(event => `
+
+      <tr>
+
+        <td>
+
+          <strong>
+            ${escapeHtml(event.name)}
+          </strong>
+
+        </td>
+
+        <td class="num-cell">
+
+          ${event.attendees}
+
+        </td>
+
+        <td class="num-cell">
+
+          ${event.active}
+
+        </td>
+
+        <td class="num-cell">
+
+          ${event.newCount}
+
+        </td>
+
+        <td class="num-cell">
+
+          ${event.following}
+
+        </td>
+
+        <td class="num-cell">
+
+          ${event.firstTimers}
+
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   ADD / EDIT PERSON
+   ========================================================= */
+
+function openModal(person = null){
+
+  editingId =
+    person
+      ? person.id
+      : null;
+
+
+  $("#modalTitle").textContent =
+    person
+      ? "Edit Person"
+      : "Add Person";
+
+
+  $("#name").value =
+    person?.name || "";
+
+
+  $("#age").value =
+    person?.age ?? "";
+
+
+  $("#gender").value =
+    person?.gender || "";
+
+
+  $("#contact").value =
+    person?.contact || "";
+
+
+  $("#facebook").value =
+    person?.facebook || "";
+
+
+  $("#area").value =
+    person?.area || "";
+
+
+  $("#dateInvited").value =
+    person?.date_invited || "";
+
+
+  $("#event").value =
+    person?.event || "";
+
+
+  $("#consolidator").value =
+    person?.consolidator || "";
+
+
+  $("#challenge").value =
+    person?.challenge_accepted ||
+    "Not Yet";
+
+
+  $("#journey").value =
+    person?.journey_status ||
+    "Purpose";
+
+
+  $("#status").value =
+    person?.status ||
+    "New";
+
+
+  $("#personOverlay")
+    .classList
+    .add("open");
+
+}
+
+
+/* =========================================================
+   EDIT
+   ========================================================= */
+
+window.editPerson =
+  function(id){
+
+    const person =
+      friends.find(
+        p => String(p.id) === String(id)
+      );
+
+
+    if(person)
+      openModal(person);
+
+  };
+
+
+/* =========================================================
+   DELETE
+   ========================================================= */
+
+window.deletePerson =
+  async function(id){
+
+    const person =
+      friends.find(
+        p => String(p.id) === String(id)
+      );
+
+
+    if(!person)
+      return;
+
+
+    if(!confirm(
+      `Delete ${person.name}'s record?`
+    ))
+      return;
+
+
     try{
-      await window.storage.set("friends-data", JSON.stringify(friends), false);
-      await window.storage.set("active-members-data", JSON.stringify(activeMembers), false);
-      await window.storage.set("events-data", JSON.stringify(events), false);
-    }catch(e){}
-    renderAll();
-    showToast("All data cleared.");
+
+      await supabaseRequest(
+        "friends",
+        "DELETE",
+        null,
+        `?id=eq.${encodeURIComponent(id)}`
+      );
+
+
+      friends =
+        friends.filter(
+          p => String(p.id) !== String(id)
+        );
+
+
+      renderAll();
+
+      showToast(
+        "Person deleted."
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      showToast(
+        "Unable to delete record."
+      );
+
+    }
+
+  };
+
+
+/* =========================================================
+   FORM SAVE
+   ========================================================= */
+
+$("#personForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const data = {
+
+        name:
+          $("#name")
+            .value
+            .trim(),
+
+        age:
+          $("#age").value
+            ? Number($("#age").value)
+            : null,
+
+        gender:
+          $("#gender").value || null,
+
+        contact:
+          $("#contact")
+            .value
+            .trim(),
+
+        facebook:
+          $("#facebook")
+            .value
+            .trim(),
+
+        area:
+          $("#area").value || null,
+
+        date_invited:
+          $("#dateInvited").value || null,
+
+        event:
+          $("#event")
+            .value
+            .trim(),
+
+        consolidator:
+          $("#consolidator")
+            .value
+            .trim(),
+
+        challenge_accepted:
+          $("#challenge").value,
+
+        journey_status:
+          $("#journey").value,
+
+        status:
+          $("#status").value
+
+      };
+
+
+      if(!data.name){
+
+        showToast(
+          "Please enter a name."
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        if(editingId){
+
+          /*
+            UPDATE EXISTING RECORD
+          */
+
+          await supabaseRequest(
+            "friends",
+            "PATCH",
+            data,
+            `?id=eq.${encodeURIComponent(editingId)}`
+          );
+
+
+          const index =
+            friends.findIndex(
+              p =>
+                String(p.id) ===
+                String(editingId)
+            );
+
+
+          if(index !== -1){
+
+            friends[index] = {
+
+              ...friends[index],
+
+              ...data
+
+            };
+
+          }
+
+
+          showToast(
+            "Person updated."
+          );
+
+
+        }else{
+
+          /*
+            CREATE NEW RECORD
+          */
+
+          const newPerson = {
+
+            id:
+              crypto.randomUUID(),
+
+            ...data
+
+          };
+
+
+          const inserted =
+            await supabaseRequest(
+              "friends",
+              "POST",
+              newPerson
+            );
+
+
+          if(inserted?.[0])
+            friends.unshift(
+              inserted[0]
+            );
+          else
+            friends.unshift(
+              newPerson
+            );
+
+
+          showToast(
+            "Person added."
+          );
+
+        }
+
+
+        closeModal();
+
+        renderAll();
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showToast(
+          "Could not save. Check Supabase."
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   CLOSE MODAL
+   ========================================================= */
+
+function closeModal(){
+
+  $("#personOverlay")
+    .classList
+    .remove("open");
+
+  editingId = null;
+
+}
+
+
+$("#cancelBtn")
+  .addEventListener(
+    "click",
+    closeModal
+  );
+
+
+$("#personOverlay")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "personOverlay"
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+$("#addBtn")
+  .addEventListener(
+    "click",
+    () => openModal()
+  );
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+$("#search")
+  .addEventListener(
+    "input",
+    renderFriends
+  );
+
+
+$("#activeSearch")
+  .addEventListener(
+    "input",
+    renderActiveMembers
+  );
+
+
+/* =========================================================
+   ALL AREA FILTER
+   ========================================================= */
+
+document
+  .querySelector(
+    '[data-area="All"]'
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      selectedArea =
+        "All";
+
+
+      document
+        .querySelectorAll(
+          ".filter-group .chip"
+        )
+        .forEach(
+          chip =>
+            chip.classList.remove(
+              "active"
+            )
+        );
+
+
+      this.classList.add(
+        "active"
+      );
+
+
+      renderAreaFilters();
+
+      renderFriends();
+
+    }
+  );
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+document
+  .querySelectorAll(".tab")
+  .forEach(tab => {
+
+    tab.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".tab")
+          .forEach(
+            t =>
+              t.setAttribute(
+                "aria-selected",
+                "false"
+              )
+          );
+
+
+        tab.setAttribute(
+          "aria-selected",
+          "true"
+        );
+
+
+        document
+          .querySelectorAll(".section")
+          .forEach(
+            section =>
+              section.classList.remove(
+                "active"
+              )
+          );
+
+
+        document
+          .querySelector(
+            "#section-" +
+            tab.dataset.tab
+          )
+          .classList.add(
+            "active"
+          );
+
+      }
+    );
+
   });
 
-  loadData();
-})();
+
+/* =========================================================
+   REFRESH
+   ========================================================= */
+
+$("#refreshBtn")
+  .addEventListener(
+    "click",
+    async () => {
+
+      showToast(
+        "Refreshing..."
+      );
+
+      await loadData();
+
+      showToast(
+        "Data refreshed."
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   CSV EXPORT
+   ========================================================= */
+
+$("#exportBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      if(!friends.length){
+
+        showToast(
+          "No records to export."
+        );
+
+        return;
+
+      }
+
+
+      const headers = [
+
+        "Name",
+        "Age",
+        "Gender",
+        "Contact",
+        "Facebook",
+        "Area",
+        "Date Invited",
+        "Event",
+        "Consolidator",
+        "Challenge Accepted",
+        "Journey Status",
+        "Status"
+
+      ];
+
+
+      const rows =
+        friends.map(
+          p => [
+
+            p.name,
+            p.age,
+            p.gender,
+            p.contact,
+            p.facebook,
+            p.area,
+            p.date_invited,
+            p.event,
+            p.consolidator,
+            p.challenge_accepted,
+            p.journey_status,
+            p.status
+
+          ]
+        );
+
+
+      const csv =
+        [
+          headers,
+          ...rows
+
+        ]
+
+        .map(
+          row =>
+            row
+              .map(
+                value =>
+                  `"${String(
+                    value ?? ""
+                  ).replace(
+                    /"/g,
+                    '""'
+                  )}"`
+              )
+              .join(",")
+        )
+
+        .join("\r\n");
+
+
+      const blob =
+        new Blob(
+          [csv],
+          {
+            type:
+              "text/csv;charset=utf-8;"
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(
+          blob
+        );
+
+
+      const link =
+        document.createElement("a");
+
+
+      link.href =
+        url;
+
+      link.download =
+        "ytr-rizal-records.csv";
+
+
+      link.click();
+
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+loadData();
+
 </script>
+
 </body>
 </html>
