@@ -804,8 +804,7 @@ tbody tr:hover{
     id="stats">
   </div>
 
-  <div
-    class="table-wrap">
+  <div class="table-wrap">
 
     <table>
 
@@ -820,8 +819,7 @@ tbody tr:hover{
 
       </thead>
 
-      <tbody
-        id="journeySummary">
+      <tbody id="journeySummary">
       </tbody>
 
     </table>
@@ -2041,7 +2039,7 @@ function renderActiveMembers(){
 
 
 /* =========================================================
-   ⭐ EVENTS — AUTOMATICALLY GENERATED FROM FRIENDS
+   EVENTS — AUTOMATICALLY GENERATED FROM FRIENDS
    ========================================================= */
 
 function getEventData(){
@@ -2055,9 +2053,20 @@ function getEventData(){
       (person.event || "").trim();
 
 
+    /*
+      If the Event field is empty,
+      this person is not included in
+      any event.
+    */
+
     if(!event)
       return;
 
+
+    /*
+      Create a new event entry
+      if it does not exist yet.
+    */
 
     if(!eventMap[event]){
 
@@ -2080,16 +2089,33 @@ function getEventData(){
     }
 
 
+    /*
+      Every person with this exact
+      Event value counts as an attendee.
+    */
+
     eventMap[event].attendees++;
 
+
+    /*
+      Count Active members.
+    */
 
     if(person.status === "Active")
       eventMap[event].active++;
 
 
+    /*
+      Count New members.
+    */
+
     if(person.status === "New")
       eventMap[event].newCount++;
 
+
+    /*
+      Count people being Followed Up.
+    */
 
     if(person.status === "Following Up")
       eventMap[event].following++;
@@ -2097,7 +2123,7 @@ function getEventData(){
 
     /*
       Challenge Accepted = Yes
-      is treated as a first timer/accepted participant.
+      is counted under First Timers.
     */
 
     if(person.challenge_accepted === "Yes")
@@ -2105,6 +2131,11 @@ function getEventData(){
 
   });
 
+
+  /*
+    Convert object to array and
+    sort alphabetically.
+  */
 
   return Object.values(eventMap)
     .sort(
@@ -2114,6 +2145,10 @@ function getEventData(){
 
 }
 
+
+/* =========================================================
+   RENDER EVENTS
+   ========================================================= */
 
 function renderEvents(){
 
@@ -2128,6 +2163,10 @@ function renderEvents(){
   const body =
     $("#eventsBody");
 
+
+  /*
+    NO EVENTS
+  */
 
   if(data.length === 0){
 
@@ -2377,6 +2416,7 @@ window.deletePerson =
 
       renderAll();
 
+
       showToast(
         "Person deleted."
       );
@@ -2436,6 +2476,11 @@ $("#personForm")
 
         date_invited:
           $("#dateInvited").value || null,
+
+        /*
+          This is the field used
+          for automatic Event counting.
+        */
 
         event:
           $("#event")
@@ -2554,6 +2599,12 @@ $("#personForm")
 
 
         closeModal();
+
+        /*
+          IMPORTANT:
+          renderAll() updates the Events tab
+          immediately after Add/Edit.
+        */
 
         renderAll();
 
